@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Ashish ❤️</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, sans-serif;
+}
+
+body{
+  background:black;
+  color:white;
+  overflow:hidden;
+}
+
+.page{
+  width:100vw;
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  position:absolute;
+  left:100%;
+  transition:0.6s ease;
+}
+
+.page.active{ left:0; }
+.page.prev{ left:-100%; }
+
+h1{
+  font-size:2.5rem;
+  text-align:center;
+}
+
+button, .link-btn{
+  margin-top:30px;
+  padding:12px 30px;
+  border:none;
+  border-radius:30px;
+  background:#ff4d6d;
+  color:white;
+  font-size:1rem;
+  cursor:pointer;
+  text-decoration:none;
+  display:inline-block;
+  transition:0.3s ease;
+}
+
+button:hover, .link-btn:hover{
+  background:#ff1744;
+  transform:scale(1.05);
+}
+
+img{
+  width:80%;
+  max-width:320px;
+  border-radius:20px;
+  box-shadow:0 0 25px rgba(255,77,109,0.6);
+}
+
+/* Letter */
+.letter{
+  max-width:650px;
+  padding:25px;
+  text-align:center;
+  line-height:1.7;
+  z-index:2;
+}
+
+/* Hearts */
+.heart{
+  position:absolute;
+  bottom:-20px;
+  font-size:20px;
+  animation:float 6s linear infinite;
+}
+
+@keyframes float{
+  from{ transform:translateY(0); opacity:1; }
+  to{ transform:translateY(-120vh); opacity:0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div class="page active" id="p1">
+  <h1>Happy Birthday Ashish 🎂❤️</h1>
+  <button onclick="next()">Next →</button>
+  <a href="#p2" class="link-btn" style="margin-left:15px;">Jump to Photos</a>
+</div>
+
+<!-- PAGE 2 (ONE PHOTO ONLY) -->
+<div class="page" id="p2">
+  <img src="image.jpg" alt="Us">
+  <button onclick="next()">Next →</button>
+  <button onclick="previous()" style="background:#666; margin-left:15px;">← Back</button>
+</div>
+
+<!-- PAGE 3 (LETTER + SONG) -->
+<div class="page" id="p3">
+  <div class="letter">
+    <h1>For You ❤️</h1>
+    <p>
+      <!-- YAHAN APNA LETTER PASTE KARO -->
+      Happy Birthday, Ashish.
+I still remember the first time we had a video call. I actually blushed when I heard your deep, manly voice. It’s funny because I was just casually looking for timepass on Telegram back then, and then you texted me personally. One thing led to another, and we shifted from Telegram to WhatsApp.
+I also remember how I used to reply after three or four hours because you were in my locked chats and I kept forgetting. Slowly, though, I started feeling a connection with you. And then, like an idiot, I told myself, “It’s time to ghost this guy. I’m done.” I even tried to do it.
+You had just shifted to a new room, then you went back home, and we didn’t talk for three days. By then, I was already too attached — more than I can explain in words. I even had a slight fever, probably because I felt guilty that the conversation had stopped because of me. I kept checking WhatsApp again and again, watching when you came online and when you left — basically stalking you.
+Then one afternoon, you called me. And just like that, we started talking again. That was the moment I realized I didn’t want to lose you. Still, I tried to ghost you a few more times, even though the truth was that I had started loving you.
+Today, with a clear mind and an honest heart, I want to say this out loud:
+I love you deeply. My day begins with you and ends with you. You feel like home to me.
+I love you, cutu.
+    </p>
+  </div>
+
+  <audio id="song">
+    <source src="song.mp3" type="audio/mpeg">
+  </audio>
+  <button onclick="previous()" style="background:#666; margin-top:30px;">← Back</button>
+</div>
+
+<script>
+let current = 1;
+
+function next(){
+  document.getElementById("p"+current).classList.remove("active");
+  document.getElementById("p"+current).classList.add("prev");
+  current++;
+  document.getElementById("p"+current).classList.add("active");
+
+  if(current === 3){
+    document.getElementById("song").play();
+  }
+}
+
+function previous(){
+  if(current > 1){
+    document.getElementById("p"+current).classList.remove("active");
+    document.getElementById("p"+current).classList.add("prev");
+    current--;
+    document.getElementById("p"+current).classList.remove("prev");
+    document.getElementById("p"+current).classList.add("active");
+    document.getElementById("song").pause();
+  }
+}
+
+// heart animation
+setInterval(()=>{
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "%";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(), 6000);
+}, 300);
+</script>
+</body>
+</html>
